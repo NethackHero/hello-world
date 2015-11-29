@@ -1,6 +1,10 @@
-var getJSONText = function(url){
+var all = [];
+var online = [];
+var offline = [];
+
+var getJSONText = function(urlBegin, urlEnd){
 	var xmlhttp = new XMLHttpRequest(); //keystone of AJAX
-	var url = url;
+	var url = urlBegin +urlEnd;
 
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -9,6 +13,7 @@ var getJSONText = function(url){
 			if(jsonObj.stream === null){
 				//console.log("Offline ");
 				$('p').append("Offline ");
+				offline.push({name:urlEnd});
 			}
 			else{
 				//console.log("Online ");
@@ -34,15 +39,27 @@ var mainLink = "https://api.twitch.tv/kraken/";
 var channelsSubLink = "channels/";
 var streamsSubLink = "streams/";
 users.forEach(function(value, index, array){
-	//getJSONText(mainLink + channelsSubLink + value);
-	getJSONText(mainLink + streamsSubLink + value);
-	console.log("Index: "+index);
+	//getJSONText(mainLink + channelsSubLink, value);
+	getJSONText(mainLink + streamsSubLink, value);
 	});
 //getJSONText("https://api.twitch.tv/kraken");
 //var ffc = getJSONText("https://api.twitch.tv/kraken/channels/freecodecamp/");
 
 //console.log(main); //the reason it is undefined is because this comes first
 //console.log(ffc);
+
+var displayAll = function(){
+	console.log("Displaying all");
+	console.log(offline);
+};
+
+var displayOnline = function(){
+	console.log("Displaying online");
+};
+
+var displayOffline = function(){
+	console.log("Displaying offline");
+};
 
 $(document).ready(function(){
 	});
