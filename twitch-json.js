@@ -13,7 +13,10 @@ var getJSONText = function(url){
 			else{
 				//console.log("Online ");
 				var streamLink = jsonObj.stream.channel.url;
-				$('p').append("Online. <a href='" + streamLink +"'>Click Here</a>");
+				var channelLogo = jsonObj.stream.channel.logo;
+				var channelName = jsonObj.stream.channel.display_name;
+				var currentlyStreaming = jsonObj.stream.game;
+				$('p').append("<b style='color:red'>" + channelName + "</b>" + " is <b>Online</b> and currently streaming: <b style='color:green'>" + currentlyStreaming + "</b>. <a href='" + streamLink +"'>Click Here</a> <img src='" + channelLogo + "'>");
 			}
 			//console.log(responseText);
 			$('p').append(responseText + "<br><br>");
