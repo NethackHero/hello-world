@@ -1,4 +1,3 @@
-
 var online = [];
 var offline = [];
 
@@ -25,7 +24,7 @@ var getJSONText = function(urlBegin, urlEnd, index){
 			if(jsonObj.stream === null){
 				//console.log("Offline ");
 				$('p').append("<b style='color:red'>" + urlEnd + "</b> is Offline ");
-				offline.push({name:urlEnd});
+				offline.push({name:urlEnd, online: false});
 			}
 			else{
 				//console.log("Online ");
@@ -34,7 +33,10 @@ var getJSONText = function(urlBegin, urlEnd, index){
 				var channelName = jsonObj.stream.channel.display_name;
 				var currentlyStreaming = jsonObj.stream.channel.status;
 				$('p').append("<b style='color:green'>" + channelName + "</b>" + " is <b>Online</b> and currently streaming: <b style='color:green'>" + currentlyStreaming + "</b>. <a href='" + streamLink +"'>Click Here</a> <img src='" + channelLogo + "'>");
-				online.push({name:urlEnd});
+				online.push({name:channelName, link:streamLink,
+					logo: channelLogo, status: currentlyStreaming,
+					online: true
+					});
 			}
 			if(index===countUsers-1){
 				console.log("finish");
