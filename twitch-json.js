@@ -22,17 +22,17 @@ var getJSONText = function(urlBegin, urlEnd, index){
 			var responseText = xmlhttp.responseText;
 			var jsonObj = JSON.parse(responseText);
 			if(jsonObj.stream === null){
-				//console.log("Offline ");
+				/*
 				$('p').append("<b style='color:red'>" + urlEnd + "</b> is Offline ");
+				*/
 				offline.push({name:urlEnd, online: false});
 			}
 			else{
-				//console.log("Online ");
 				var streamLink = jsonObj.stream.channel.url;
 				var channelLogo = jsonObj.stream.channel.logo;
 				var channelName = jsonObj.stream.channel.display_name;
 				var currentlyStreaming = jsonObj.stream.channel.status;
-				$('p').append("<b style='color:green'>" + channelName + "</b>" + " is <b>Online</b> and currently streaming: <b style='color:green'>" + currentlyStreaming + "</b>. <a href='" + streamLink +"'>Click Here</a> <img src='" + channelLogo + "'>");
+				/*$('p').append("<b style='color:green'>" + channelName + "</b>" + " is <b>Online</b> and currently streaming: <b style='color:green'>" + currentlyStreaming + "</b>. <a href='" + streamLink +"'>Click Here</a> <img src='" + channelLogo + "'>");*/
 				online.push({name:channelName, link:streamLink,
 					logo: channelLogo, status: currentlyStreaming,
 					online: true
@@ -40,13 +40,9 @@ var getJSONText = function(urlBegin, urlEnd, index){
 			}
 			if(index===countUsers-1){
 				console.log("finish");
-				displayAll();
+				window.setTimeout(displayAll, 1000); //setting a pause for 1 second as a temporary solution
+				//displayAll(); //this sometimes doesn't show all channels -- best figure out how to do an asynchrous display
 			}
-			//console.log(responseText);
-			$('p').append(responseText + "<br><br>");
-			//we can append to HTML text
-			//getJSONText("https://api.twitch.tv/kraken/channels/freecodecamp/"); //LOOPING
-			//return responseText; //doesn't work because the outside gets called first ... this may have an asynchronous
 		}
 	};
 	xmlhttp.open("GET", url, true);
@@ -62,26 +58,32 @@ users.forEach(function(value, index, array){
 	//getJSONText(mainLink + channelsSubLink, value);
 	getJSONText(mainLink + streamsSubLink, value, index);
 	});
-//getJSONText("https://api.twitch.tv/kraken");
-//var ffc = getJSONText("https://api.twitch.tv/kraken/channels/freecodecamp/");
-
-//console.log(main); //the reason it is undefined is because this comes first
-//console.log(ffc);
 
 var displayAll = function(){
-	console.log("Displaying all");
 	var all = online.concat(offline);
-	console.log(all);
+	displayChannels(all);
 };
 
 var displayOnline = function(){
-	console.log("Displaying online");
-	console.log(online);
+	displayChannels(online);
 };
 
 var displayOffline = function(){
-	console.log("Displaying offline");
-	console.log(offline);
+	displayChannels(offline);
+};
+
+var displayChannels = function(arr){
+	$('p').html('');
+	arr.forEach(function(value, index, array){
+		var channel;
+		if(value.online){
+			channel = "<b style='color:green'>" + value.name + "</b>";
+			}
+		else{
+			channel = "<b style='color:red'>" + value.name + "</b>";
+		}
+		$('p').append(channel + "<br><br>");
+		});
 };
 
 $(document).ready(function(){
