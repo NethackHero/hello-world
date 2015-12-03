@@ -1,14 +1,17 @@
 var online = [];
 var offline = [];
 
-var getJSONChannelInfo = function(url){
+var getJSONChannelInfo = function(url, offlineIndex){
 	var xmlhttp = new XMLHttpRequest();
 	var url = url;
-	
+	console.log(url);
 	xmlhttp.onreadystatechange = function(){
+		console.log("I'm in getJSONChannelInfo2");
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
 			var responseText = xmlhttp.responseText;
 			var jsonObj = JSON.parse(responseText);
+			offline[offlineIndex].logo = jsonObj.logo;
+			console.log(jsonObj.logo);
 		}
 	}
 }
@@ -26,6 +29,8 @@ var getJSONText = function(urlBegin, urlEnd, index){
 				$('p').append("<b style='color:red'>" + urlEnd + "</b> is Offline ");
 				*/
 				offline.push({name:urlEnd, online: false});
+				var offlineIndex = offline.length-1;
+				getJSONChannelInfo(mainLink+channelsSubLink+urlEnd,index);
 			}
 			else{
 				var streamLink = jsonObj.stream.channel.url;
@@ -75,14 +80,14 @@ var displayOffline = function(){
 var displayChannels = function(arr){
 	$('p').html('');
 	arr.forEach(function(value, index, array){
-		var channel;
+		var channelStatus;
 		if(value.online){
-			channel = "<b style='color:green'>" + value.name + "</b>";
+			channelStatus = "<b style='color:green'>" + value.name + "</b>" + " is online";
 			}
 		else{
-			channel = "<b style='color:red'>" + value.name + "</b>";
+			channelStatus = "<b style='color:red'>" + value.name + "</b>" + " is offline";
 		}
-		$('p').append(channel + "<br><br>");
+		$('p').append("<img src='" + value.logo + "' >" + channelStatus + "<br><br>");
 		});
 };
 
