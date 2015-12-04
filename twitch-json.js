@@ -6,19 +6,21 @@ var getJSONChannelInfo = function(url, offlineIndex){
 	var url = url;
 	console.log(url);
 	xmlhttp.onreadystatechange = function(){
-		console.log("I'm in getJSONChannelInfo2");
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
 			var responseText = xmlhttp.responseText;
 			var jsonObj = JSON.parse(responseText);
 			offline[offlineIndex].logo = jsonObj.logo;
-			console.log(jsonObj.logo);
+			offline[offlineIndex].link = jsonObj.url;
 		}
-	}
+	};
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
 }
 
 var getJSONText = function(urlBegin, urlEnd, index){
 	var xmlhttp = new XMLHttpRequest(); //keystone of AJAX
 	var url = urlBegin +urlEnd;
+	
 
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -30,7 +32,7 @@ var getJSONText = function(urlBegin, urlEnd, index){
 				*/
 				offline.push({name:urlEnd, online: false});
 				var offlineIndex = offline.length-1;
-				getJSONChannelInfo(mainLink+channelsSubLink+urlEnd,index);
+				getJSONChannelInfo(mainLink+channelsSubLink+urlEnd,offlineIndex);
 			}
 			else{
 				var streamLink = jsonObj.stream.channel.url;
@@ -87,7 +89,7 @@ var displayChannels = function(arr){
 		else{
 			channelStatus = "<b style='color:red'>" + value.name + "</b>" + " is offline";
 		}
-		$('p').append("<img src='" + value.logo + "' >" + channelStatus + "<br><br>");
+		$('p').append("<img src='" + value.logo + "' >" + channelStatus + ", Currently streaming: " + value.status + ", <a href='" + value.link +"'>Click Here</a>" + "<br><br>");
 		});
 };
 
