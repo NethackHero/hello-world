@@ -1,5 +1,6 @@
 var online = [];
 var offline = [];
+var currentActive = [];
 
 var getJSONChannelInfo = function(url, offlineIndex){
 	var xmlhttp = new XMLHttpRequest();
@@ -17,7 +18,7 @@ var getJSONChannelInfo = function(url, offlineIndex){
 	xmlhttp.send();
 }
 
-var getJSONText = function(urlBegin, urlEnd, index){
+var getJSONStreamInfo = function(urlBegin, urlEnd, index){
 	var xmlhttp = new XMLHttpRequest(); //keystone of AJAX
 	var url = urlBegin +urlEnd;
 	
@@ -62,21 +63,23 @@ var channelsSubLink = "channels/";
 var streamsSubLink = "streams/";
 var countUsers = users.length;
 users.forEach(function(value, index, array){
-	//getJSONText(mainLink + channelsSubLink, value);
-	getJSONText(mainLink + streamsSubLink, value, index);
+	getJSONStreamInfo(mainLink + streamsSubLink, value, index);
 	});
 
 var displayAll = function(){
 	var all = online.concat(offline);
 	displayChannels(all);
+	currentActive = all;
 };
 
 var displayOnline = function(){
 	displayChannels(online);
+	currentActive = online;
 };
 
 var displayOffline = function(){
 	displayChannels(offline);
+	currentActive = offline;
 };
 
 var displayChannels = function(arr){
@@ -100,6 +103,10 @@ var displayChannels = function(arr){
 		$('p').append(logo + channelStatus + currentlyStreaming + " <a href='" + value.link +"'>Click Here</a>" + "<br><br>");
 		});
 };
+
+var searchChannel = function(text){
+	
+}
 
 $(document).ready(function(){
 	});
