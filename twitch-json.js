@@ -83,13 +83,21 @@ var displayChannels = function(arr){
 	$('p').html('');
 	arr.forEach(function(value, index, array){
 		var channelStatus;
+		var currentlyStreaming;
+		var logo = "";
 		if(value.online){
-			channelStatus = "<b style='color:green'>" + value.name + "</b>" + " is online";
+			channelStatus = "<b style='color:green'>" + value.name + "</b>" + " is online.";
+			currentlyStreaming = " Currently streaming: " + value.status
 			}
 		else{
-			channelStatus = "<b style='color:red'>" + value.name + "</b>" + " is offline";
+			channelStatus = "<b style='color:red'>" + value.name + "</b>" + " is offline.";
+			currentlyStreaming = "";
 		}
-		$('p').append("<img src='" + value.logo + "' >" + channelStatus + ", Currently streaming: " + value.status + ", <a href='" + value.link +"'>Click Here</a>" + "<br><br>");
+		
+		if(value.logo != null){
+			logo = "<img src='" + value.logo + "' >"
+		}
+		$('p').append(logo + channelStatus + currentlyStreaming + " <a href='" + value.link +"'>Click Here</a>" + "<br><br>");
 		});
 };
 
