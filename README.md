@@ -5,7 +5,7 @@ Problems we are currently facing:
 
 ===========================
 Next:
-Get the search function to work, first without having to type into the text box (using a declared variable)
+If twitch account has been closed and no longer available as a channel in the array, we should display that the channel has been closed.
 
 ===========================
 Do later:
@@ -17,8 +17,9 @@ Change to use channel instead of stream to get logo, and information like that. 
 ===========================
 
 What we did previously:
+We finished the entire search function of the app.
 
-
+Get the search function to work, first without having to type into the text box (using a declared variable)
 
 Start the search, start with creating a text box with a button.
 
