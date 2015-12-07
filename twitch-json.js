@@ -104,8 +104,17 @@ var displayChannels = function(arr){
 		});
 };
 
-var searchChannel = function(text){
-	
+var searchChannel = function(){
+	var text = document.getElementById('searchText').value.toLowerCase();
+	var matchList = [];
+	for(i=0; i<currentActive.length; i++){
+		var matchAt = currentActive[i].name.toLowerCase().indexOf(text);
+		if(matchAt != -1){
+			matchList.push(currentActive[i]);
+		}
+		displayChannels(matchList);
+	}
+	//text.indexOf(text);
 }
 
 $(document).ready(function(){
