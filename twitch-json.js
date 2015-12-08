@@ -1,17 +1,16 @@
 var online = [];
 var offline = [];
+var unavailable = [];
 var currentActive = [];
 
-var getJSONChannelInfo = function(url, offlineIndex){
+var getJSONChannelInfo = function(urlFront, urlEnd){
 	var xmlhttp = new XMLHttpRequest();
-	var url = url;
-	console.log(url);
+	var url = urlFront + urlEnd;
 	xmlhttp.onreadystatechange = function(){
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
 			var responseText = xmlhttp.responseText;
 			var jsonObj = JSON.parse(responseText);
-			offline[offlineIndex].logo = jsonObj.logo;
-			offline[offlineIndex].link = jsonObj.url;
+			offline.push({name:jsonObj.display_name, online: false, logo:jsonObj.logo, link:jsonObj.url});
 		}
 	};
 	xmlhttp.open("GET", url, true);
@@ -31,9 +30,12 @@ var getJSONStreamInfo = function(urlBegin, urlEnd, index){
 				/*
 				$('p').append("<b style='color:red'>" + urlEnd + "</b> is Offline ");
 				*/
-				offline.push({name:urlEnd, online: false});
-				var offlineIndex = offline.length-1;
-				getJSONChannelInfo(mainLink+channelsSubLink+urlEnd,offlineIndex);
+				getJSONChannelInfo(mainLink+channelsSubLink, urlEnd);
+			}
+			else if(jsonObj.error != undefined){
+				var stat = jsonObj.error;
+				//console.log(stat);
+				unavailable.push({name: urlEnd, message: jsonObj.message});
 			}
 			else{
 				var streamLink = jsonObj.stream.channel.url;
@@ -47,7 +49,6 @@ var getJSONStreamInfo = function(urlBegin, urlEnd, index){
 					});
 			}
 			if(index===countUsers-1){
-				console.log("finish");
 				window.setTimeout(displayAll, 1000); //setting a pause for 1 second as a temporary solution
 				//displayAll(); //this sometimes doesn't show all channels -- best figure out how to do an asynchrous display
 			}
@@ -57,7 +58,7 @@ var getJSONStreamInfo = function(urlBegin, urlEnd, index){
 	xmlhttp.send();
 }
 
-var users = ["freecodecamp", "storbeck", "terakilobyte", "habathcx","RobotCaleb","thomasballinger","noobs2ninjas","beohoff","medrybw","tsm_theoddone"]
+var users = ["freecodecamp", "storbeck", "terakilobyte", "habathcx","RobotCaleb","thomasballinger","noobs2ninjas","beohoff","medrybw","tsm_theoddone"];
 var mainLink = "https://api.twitch.tv/kraken/";
 var channelsSubLink = "channels/";
 var streamsSubLink = "streams/";
@@ -85,22 +86,29 @@ var displayOffline = function(){
 var displayChannels = function(arr){
 	$('p').html('');
 	arr.forEach(function(value, index, array){
+		var message;
 		var channelStatus;
 		var currentlyStreaming;
 		var logo = "";
+		if(value.logo != null || value.logo != undefined){
+			logo = "<img src='" + value.logo + "' >"
+		}
 		if(value.online){
 			channelStatus = "<b style='color:green'>" + value.name + "</b>" + " is online.";
 			currentlyStreaming = " Currently streaming: " + value.status
+			message = logo + channelStatus + currentlyStreaming + " <a href='" + value.link +"'>Click Here</a>" + "<br><br>";
 			}
-		else{
+		else if(value.online != undefined){
 			channelStatus = "<b style='color:red'>" + value.name + "</b>" + " is offline.";
 			currentlyStreaming = "";
+			message = logo + channelStatus + currentlyStreaming + " <a href='" + value.link +"'>Click Here</a>" + "<br><br>";
+		}
+		else{
+			message = value.message;
 		}
 		
-		if(value.logo != null){
-			logo = "<img src='" + value.logo + "' >"
-		}
-		$('p').append(logo + channelStatus + currentlyStreaming + " <a href='" + value.link +"'>Click Here</a>" + "<br><br>");
+		
+		$('p').append(message);
 		});
 };
 
