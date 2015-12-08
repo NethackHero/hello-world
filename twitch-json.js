@@ -117,5 +117,12 @@ var searchChannel = function(){
 	//text.indexOf(text);
 }
 
+var clearIfDefault = function(){
+	var text = document.getElementById('searchText').value;
+	if(text === 'type here'){
+		document.getElementById('searchText').value = '';
+	}
+}
+
 $(document).ready(function(){
 	});
