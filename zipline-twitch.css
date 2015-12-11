@@ -1,0 +1,20 @@
+.outer-container{
+	background-color: yellow;
+	border: solid 10px;
+	border-color: green;
+	border-radius: 40px;
+	padding: 20px;
+}
+
+.button-container{
+	background-color: grey;
+	border: dotted 4px yellow;
+	border-radius: 10px;
+	padding: 4px;
+}
+
+h1{
+	color: Blue;
+	text-shadow: 3px 3px 2px green;
+	font-size: 40px;
+}
