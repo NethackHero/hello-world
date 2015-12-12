@@ -5,17 +5,24 @@ Problems we are currently facing:
 
 ===========================
 Next:
-Start centering the elements. Tighten up the outer container. Make the buttons look like tabs instead of buttons.
+Tighten up the outer container. Make the buttons look like tabs instead of buttons.
+
+apply bootstrap: http://getbootstrap.com/components/#nav-tabs
 
 ===========================
 Do later/On the way:
+
 If twitch account has been closed and no longer available as a channel in the array, we should display that the channel has been closed. <--- Still figuring this out
 
 Reconsider:
+Start centering the elements. -- considering design
+
 Consider changing the call to firstly collect the information from the channel JSON, then check whether they are offline or online from the stream JSON.
 Change to use channel instead of stream to get logo, and information like that. //decided not to do this switch, because we have to call the JSON for stream anyways to check for online/offline, and we will actually be saving an extra JSON call if the stream was online (this will depend how heavy on the system per call is. A benefit however, is that it may be less code, and code that is more easily understandable.
 
 ===========================
+included bootstrap links and added div containers to search and channel loading sections.
+
 UI time, starting with the container, border, title.
 First create a css file and link it to the html. 
 
