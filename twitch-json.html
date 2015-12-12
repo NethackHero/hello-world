@@ -1,15 +1,25 @@
 <head>
-	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="zipline-twitch.css">
 </head>
 
 <body>
-	<button onclick="displayAll()">All</button>
-	<button onclick="displayOnline()">Online</button>
-	<button onclick="displayOffline()">Offline</button>
-	<input type=text value="type here" id="searchText" onclick="clearIfDefault()">
-	<button onclick="searchChannel()">Search</button>
-	<p></p>
+	<div class='outer-container'>
+		<h1>NethackHero's favourite channels</h1>
+			<div class='button-container'>
+				<button onclick="displayAll()">All</button>
+				<button onclick="displayOnline()">Online</button>
+				<button onclick="displayOffline()">Offline</button>
+			</div>
+		<div class='search-container'>
+		<input type=text value="type here" id="searchText" onclick="clearIfDefault()">
+		<button onclick="searchChannel()">Search</button>
+		</div>
+		<div class='channel-container'>
+		<p></p>
+		</div>
+	</div>
 </body>
 <script src="zipline-twitch.js" type="text/javascript"></script>
