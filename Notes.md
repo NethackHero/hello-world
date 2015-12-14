@@ -5,7 +5,7 @@ Problems we are currently facing:
 
 ===========================
 Next:
-Tighten up the outer container. Make the buttons look like tabs instead of buttons.
+Tighten up the outer container. Make the buttons look like tabs instead of buttons. (Margins)
 
 apply bootstrap: http://getbootstrap.com/components/#nav-tabs
 
