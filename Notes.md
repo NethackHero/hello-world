@@ -5,7 +5,7 @@ Problems we are currently facing:
 
 ===========================
 Next:
-Tighten up the outer container. Make the buttons look like tabs instead of buttons. (Margins)
+Make the buttons look like tabs instead of buttons.
 
 apply bootstrap: http://getbootstrap.com/components/#nav-tabs
 
@@ -21,6 +21,8 @@ Consider changing the call to firstly collect the information from the channel J
 Change to use channel instead of stream to get logo, and information like that. //decided not to do this switch, because we have to call the JSON for stream anyways to check for online/offline, and we will actually be saving an extra JSON call if the stream was online (this will depend how heavy on the system per call is. A benefit however, is that it may be less code, and code that is more easily understandable.
 
 ===========================
+Tighten up the outer container.  (Margins)
+
 included bootstrap links and added div containers to search and channel loading sections.
 
 UI time, starting with the container, border, title.
