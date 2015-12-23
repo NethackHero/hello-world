@@ -5,9 +5,9 @@ Problems we are currently facing:
 
 ===========================
 Next:
-Make the buttons look like tabs instead of buttons.
+Include the active part ability to tabs
 
-apply bootstrap: http://getbootstrap.com/components/#nav-tabs
+apply bootstrap? http://getbootstrap.com/components/#nav-tabs
 
 ===========================
 Do later/On the way:
@@ -21,6 +21,10 @@ Consider changing the call to firstly collect the information from the channel J
 Change to use channel instead of stream to get logo, and information like that. //decided not to do this switch, because we have to call the JSON for stream anyways to check for online/offline, and we will actually be saving an extra JSON call if the stream was online (this will depend how heavy on the system per call is. A benefit however, is that it may be less code, and code that is more easily understandable.
 
 ===========================
+What we did previously:
+
+Make the buttons look like tabs instead of buttons.
+
 Tighten up the outer container.  (Margins)
 
 included bootstrap links and added div containers to search and channel loading sections.
@@ -28,7 +32,7 @@ included bootstrap links and added div containers to search and channel loading 
 UI time, starting with the container, border, title.
 First create a css file and link it to the html. 
 
-What we did previously:
+
 We finished the entire search function of the app.
 
 Get the search function to work, first without having to type into the text box (using a declared variable)
