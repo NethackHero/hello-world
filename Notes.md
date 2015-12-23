@@ -7,6 +7,8 @@ Problems we are currently facing:
 Next:
 Include the active part ability to tabs
 
+Tabs should be be showing clickable cursor instead of the edit cursor
+
 apply bootstrap? http://getbootstrap.com/components/#nav-tabs
 
 ===========================
