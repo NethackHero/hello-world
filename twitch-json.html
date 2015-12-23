@@ -8,18 +8,18 @@
 <body>
 	<div class='outer-container'>
 		<h1>NethackHero's favourite channels</h1>
-			<div class='button-container'>
-				<button onclick="displayAll()">All</button>
-				<button onclick="displayOnline()">Online</button>
-				<button onclick="displayOffline()">Offline</button>
-			</div>
-		<div class='search-container'>
+		<nav>
+			<ul>
+				<li onclick="displayAll()">All</li>
+				<li onclick="displayOnline()">Online</li>
+				<li onclick="displayOffline()">Offline</li>
+			</ul>
+		</nav>
+		<section = id = 'content'>
 		<input type=text value="type here" id="searchText" onclick="clearIfDefault()">
 		<button onclick="searchChannel()">Search</button>
-		</div>
-		<div class='channel-container'>
 		<p></p>
-		</div>
+		</section>
 	</div>
 </body>
 <script src="zipline-twitch.js" type="text/javascript"></script>
