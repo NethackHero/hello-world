@@ -5,7 +5,6 @@ Problems we are currently facing:
 
 ===========================
 Next:
-Include the active part ability to tabs
 
 Tabs should be be showing clickable cursor instead of the edit cursor
 
@@ -24,6 +23,8 @@ Change to use channel instead of stream to get logo, and information like that. 
 
 ===========================
 What we did previously:
+
+Include the active part ability to tabs
 
 Make the buttons look like tabs instead of buttons.
 
